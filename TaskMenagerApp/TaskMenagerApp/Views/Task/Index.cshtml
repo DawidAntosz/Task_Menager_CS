@@ -1,0 +1,182 @@
+﻿@model IEnumerable<TaskMenagerApp.Models.MyTask>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                No.:
+            </th>
+            <th>
+                Task:
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                <div class="status-badge" style="background-color: @GetStatusColor(item.Status)" onclick="showStatusDropdown(this)">
+                    <span class="status-value">@GetStatusDisplayName(item.Status)</span>
+
+                    <select class="status-select" onchange="updateStatus(@item.Id, this.value)">
+                        <option value="@StatusTask.Not_start">No start</option>
+                        <option value="@StatusTask.Start">Start</option>
+                        <option value="@StatusTask.In_progres">In progress</option>
+                        <option value="@StatusTask.Break">Break</option>
+                        <option value="@StatusTask.Completed">Completed</option>
+                    </select>
+                </div>
+                
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new {id=item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@*Button for add new tasks*@
+<div class="container mt-4">
+    <a class="btn btn-primary" style="background-color: lightblue; border-radius: 10px; color: black" asp-action="Create">Add new task</a>
+</div>
+
+
+<style>
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .status-value {
+        display: inline-block;
+    }
+
+    .status-select {
+        display: none;
+    }
+
+    .status-badge.Not_start {
+        background-color: red;
+        color: white;
+    }
+
+    .status-badge.Start {
+        background-color: green;
+        color: white;
+    }
+
+    .status-badge.In_progres {
+        background-color: blue;
+        color: white;
+    }
+
+    .status-badge.Break {
+        background-color: orange;
+        color: white;
+    }
+
+    .status-badge.Completed {
+        background-color: green;
+        color: white;
+    }
+</style>
+
+@functions {
+    public string GetStatusColor(StatusTask status)
+    {
+        switch (status)
+        {
+            case StatusTask.Not_start:
+                return "Not_start";
+            case StatusTask.Start:
+                return "Start";
+            case StatusTask.In_progres:
+                return "In_progres";
+            case StatusTask.Break:
+                return "Break";
+            case StatusTask.Completed:
+                return "Completed";
+            default:
+                return "";
+        }
+    }
+
+    public string GetStatusDisplayName(StatusTask status)
+    {
+        switch (status)
+        {
+            case StatusTask.Not_start:
+                return "No start";
+            case StatusTask.Start:
+                return "Start";
+            case StatusTask.In_progres:
+                return "In progress";
+            case StatusTask.Break:
+                return "Break";
+            case StatusTask.Completed:
+                return "Completed";
+            default:
+                return "";
+        }
+    }
+}
+
+
+<script>
+    function showStatusDropdown(statusBadge) {
+        var statusValue = statusBadge.querySelector('.status-value');
+        var statusSelect = statusBadge.querySelector('.status-select');
+
+        statusValue.style.display = 'none';
+        statusSelect.style.display = 'inline-block';
+    }
+
+    function updateStatus(taskId, status) {
+        var statusBadge = document.querySelector('tr[data-taskid="' + taskId + '"] .status-badge');
+        var statusValue = statusBadge.querySelector('.status-value');
+        var statusSelect = statusBadge.querySelector('.status-select');
+
+        statusValue.textContent = GetStatusDisplayName(status);
+        statusBadge.style.backgroundColor = GetStatusColor(status);
+
+        statusValue.style.display = 'inline-block';
+        statusSelect.style.display = 'none';
+
+        // Send the updated status to the server
+        // Here, you can make an AJAX request to update the status in the backend
+    }
+</script>

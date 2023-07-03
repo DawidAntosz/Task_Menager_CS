@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TaskMenagerApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TaskMenagerApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div class="header-title">
+                        <span>Task Manager</span>
+                    </div>
+                    <span class="text-center" id="currentTime"></span>
+                    <span class="text-right" id="currentDate"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+    .header-title {
+        font-size: 25px; 
+        font-family: 'Josefin Slab', serif; 
+        font-style: italic;
+        background-color: lightgreen;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    #currentDate,
+    #currentTime {
+        font-size: 30px;
+        font-weight: bold;
+        font-family: Consolas;
+    }
+</style>
+
+<script>
+    setInterval(updateTime, 1000);
+    function updateTime() {
+        var now = new Date();
+        var dateElement = document.getElementById("currentDate");
+        var timeElement = document.getElementById("currentTime");
+        dateElement.textContent = formatDate(now);
+        timeElement.textContent = formatTime(now);
+    }
+    function formatTime(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return ZeroAdder(hours) + ":" + ZeroAdder(minutes) + ":" + ZeroAdder(seconds);
+    }
+    function formatDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return ZeroAdder(day) + "/" + ZeroAdder(month) + "/" + year;
+    }
+    function ZeroAdder(number) {
+        return number < 10 ? "0" + number : number;
+    }
+</script>
