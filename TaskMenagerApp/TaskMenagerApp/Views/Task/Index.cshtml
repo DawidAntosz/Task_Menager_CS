@@ -41,19 +41,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
-            <td>
-                <div class="status-badge" style="background-color: @GetStatusColor(item.Status)" onclick="showStatusDropdown(this)">
-                    <span class="status-value">@GetStatusDisplayName(item.Status)</span>
 
-                    <select class="status-select" onchange="updateStatus(@item.Id, this.value)">
-                        <option value="@StatusTask.Not_start">No start</option>
-                        <option value="@StatusTask.Start">Start</option>
-                        <option value="@StatusTask.In_progres">In progress</option>
-                        <option value="@StatusTask.Break">Break</option>
-                        <option value="@StatusTask.Completed">Completed</option>
-                    </select>
+            <td>
+                    <div class="status-badge @GetStatusColor(item.Status)" onclick="showStatusDropdown(this)">
+                        @GetStatusDisplayName(item.Status)
+                        <form action="...">
+                            <select class="status-select" onchange="updateStatus(@item.Id, this.value)">
+                                <option value ="@StatusTask.Not_start"></option>
+                                <option value ="@StatusTask.Start"></option>
+                            </select>
+                        </form>
                 </div>
-                
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {id=item.Id}) |
@@ -155,7 +153,6 @@
     }
 }
 
-
 <script>
     function showStatusDropdown(statusBadge) {
         var statusValue = statusBadge.querySelector('.status-value');
@@ -175,8 +172,5 @@
 
         statusValue.style.display = 'inline-block';
         statusSelect.style.display = 'none';
-
-        // Send the updated status to the server
-        // Here, you can make an AJAX request to update the status in the backend
     }
 </script>
