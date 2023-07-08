@@ -67,11 +67,9 @@ namespace TaskMenagerApp.Controllers
                         Data = reader.GetDateTime("data"),
                         Status = (StatusTask)Enum.Parse(typeof(StatusTask), reader["status"].ToString())
                     };
-
                     tasks.Add(DBtask);
                 }
             }
-            
             return View(tasks);
         }
 
