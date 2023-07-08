@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dawid\\Desktop\\CS_project\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj": {}
+    "C:\\Users\\Dawid\\Desktop\\CS_project\\GITHUB_Project\\Task_Menager_CS\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dawid\\Desktop\\CS_project\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj": {
+    "C:\\Users\\Dawid\\Desktop\\CS_project\\GITHUB_Project\\Task_Menager_CS\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dawid\\Desktop\\CS_project\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj",
+        "projectUniqueName": "C:\\Users\\Dawid\\Desktop\\CS_project\\GITHUB_Project\\Task_Menager_CS\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj",
         "projectName": "TaskMenagerApp",
-        "projectPath": "C:\\Users\\Dawid\\Desktop\\CS_project\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj",
+        "projectPath": "C:\\Users\\Dawid\\Desktop\\CS_project\\GITHUB_Project\\Task_Menager_CS\\TaskMenagerApp\\TaskMenagerApp\\TaskMenagerApp.csproj",
         "packagesPath": "C:\\Users\\Dawid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dawid\\Desktop\\CS_project\\TaskMenagerApp\\TaskMenagerApp\\obj\\",
+        "outputPath": "C:\\Users\\Dawid\\Desktop\\CS_project\\GITHUB_Project\\Task_Menager_CS\\TaskMenagerApp\\TaskMenagerApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -46,6 +46,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.143, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.8, )"
@@ -54,9 +62,17 @@
               "target": "Package",
               "version": "[6.0.14, )"
             },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             }
           },
           "imports": [

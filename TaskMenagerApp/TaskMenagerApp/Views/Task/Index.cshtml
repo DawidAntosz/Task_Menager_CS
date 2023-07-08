@@ -43,14 +43,17 @@
             </td>
 
             <td>
-                    <div class="status-badge @GetStatusColor(item.Status)" onclick="showStatusDropdown(this)">
-                        @GetStatusDisplayName(item.Status)
-                        <form action="...">
-                            <select class="status-select" onchange="updateStatus(@item.Id, this.value)">
-                                <option value ="@StatusTask.Not_start"></option>
-                                <option value ="@StatusTask.Start"></option>
-                            </select>
-                        </form>
+                <div class="status-badge @GetStatusColor(item.Status)" onclick="showStatusDropdown(@item.Id)">
+                    <span class="status-value">@GetStatusDisplayName(item.Status)</span>
+                    <div class="status-select">
+                        <select onchange="updateStatus(@item.Id, this.value)">
+                            <option value="@StatusTask.Not_start">No start</option>
+                            <option value="@StatusTask.Start">Start</option>
+                            <option value="@StatusTask.In_progres">In progress</option>
+                            <option value="@StatusTask.Break">Break</option>
+                            <option value="@StatusTask.Completed">Completed</option>
+                        </select>
+                    </div>
                 </div>
             </td>
             <td>
@@ -79,14 +82,6 @@
         cursor: pointer;
     }
 
-    .status-value {
-        display: inline-block;
-    }
-
-    .status-select {
-        display: none;
-    }
-
     .status-badge.Not_start {
         background-color: red;
         color: white;
@@ -111,9 +106,24 @@
         background-color: green;
         color: white;
     }
+
+    .status-value {
+        display: inline-block;
+        color: white;
+    }
+
+    .status-select {
+        display: none;
+    }
+
+    .status-select select {
+        width: 100%;
+    }
+
 </style>
 
-@functions {
+@functions 
+{
     public string GetStatusColor(StatusTask status)
     {
         switch (status)
@@ -151,26 +161,30 @@
                 return "";
         }
     }
+
 }
 
 <script>
-    function showStatusDropdown(statusBadge) {
-        var statusValue = statusBadge.querySelector('.status-value');
+
+    function showStatusDropdown(taskId) {
+        var statusBadge = document.querySelector('div[data-taskid="' + taskId + '"]');
         var statusSelect = statusBadge.querySelector('.status-select');
 
-        statusValue.style.display = 'none';
-        statusSelect.style.display = 'inline-block';
+        if (statusSelect.style.display === 'none') {
+            statusSelect.style.display = 'block';
+        } else {
+            statusSelect.style.display = 'none';
+        }
     }
 
     function updateStatus(taskId, status) {
-        var statusBadge = document.querySelector('tr[data-taskid="' + taskId + '"] .status-badge');
+        var statusBadge = document.querySelector('div[data-taskid="' + taskId + '"]');
         var statusValue = statusBadge.querySelector('.status-value');
         var statusSelect = statusBadge.querySelector('.status-select');
 
         statusValue.textContent = GetStatusDisplayName(status);
-        statusBadge.style.backgroundColor = GetStatusColor(status);
-
-        statusValue.style.display = 'inline-block';
+        statusBadge.className = 'status-badge ' + GetStatusColor(status);
         statusSelect.style.display = 'none';
     }
-</script>
+
+}</script>

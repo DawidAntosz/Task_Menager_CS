@@ -9,45 +9,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TaskMenagerApp
 build_property.RootNamespace = TaskMenagerApp
-build_property.ProjectDir = C:\Users\Dawid\Desktop\CS_project\TaskMenagerApp\TaskMenagerApp\
+build_property.ProjectDir = C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Dawid\Desktop\CS_project\TaskMenagerApp\TaskMenagerApp
+build_property.MSBuildProjectDirectory = C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Task/Create.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Task/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Task/Delete.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Task/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Task/Details.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Task/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Task/Edit.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Task/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Task/Index.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Task/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/_ViewImports.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/_ViewStart.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dawid/Desktop/CS_project/TaskMenagerApp/TaskMenagerApp/Views/Shared/_Layout.cshtml]
+[C:/Users/Dawid/Desktop/CS_project/GITHUB_Project/Task_Menager_CS/TaskMenagerApp/TaskMenagerApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-7m48uyyvoo
