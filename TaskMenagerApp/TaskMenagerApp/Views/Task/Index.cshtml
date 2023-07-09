@@ -43,10 +43,11 @@
             </td>
 
             <td>
-                <div class="status-badge @GetStatusColor(item.Status)" onclick="showStatusDropdown(@item.Id)">
-                    <span class="status-value">@GetStatusDisplayName(item.Status)</span>
-                    <div class="status-select">
-                        <select onchange="updateStatus(@item.Id, this.value)">
+                <div class="status-badge @GetStatusColor(item.Status)">
+
+                    <span class="status-value" onclick="toggleStatusDropdown(this)">@GetStatusName(item.Status)</span>
+                    <div class="status-dropdown">
+                        <select onchange="updateStatusValue(this)">
                             <option value="@StatusTask.Not_start">No start</option>
                             <option value="@StatusTask.Start">Start</option>
                             <option value="@StatusTask.In_progres">In progress</option>
@@ -56,6 +57,7 @@
                     </div>
                 </div>
             </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new {id=item.Id}) |
                 @Html.ActionLink("Details", "Details", new {id=item.Id}) |
@@ -70,6 +72,26 @@
 <div class="container mt-4">
     <a class="btn btn-primary" style="background-color: lightblue; border-radius: 10px; color: black" asp-action="Create">Add new task</a>
 </div>
+
+
+<script>
+
+    function toggleStatusDropdown(element) {
+        var dropdown = element.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+    function updateStatusValue(select) {
+        var selectedOption = select.options[select.selectedIndex];
+        var statusValue = selectedOption.value;
+        var statusText = selectedOption.text;
+        var statusBadge = select.closest('.status-badge');
+        var statusValueElement = statusBadge.querySelector('.status-value');
+
+        statusValueElement.textContent = statusText;
+        statusBadge.classList = 'status-badge ' + statusValue;
+        select.parentNode.style.display = 'none';
+    }
+</script>
 
 
 <style>
@@ -107,17 +129,9 @@
         color: white;
     }
 
-    .status-value {
-        display: inline-block;
-        color: white;
-    }
-
-    .status-select {
+    .status-dropdown {
+        position: absolute;
         display: none;
-    }
-
-    .status-select select {
-        width: 100%;
     }
 
 </style>
@@ -143,7 +157,7 @@
         }
     }
 
-    public string GetStatusDisplayName(StatusTask status)
+    public string GetStatusName(StatusTask status)
     {
         switch (status)
         {
@@ -161,30 +175,4 @@
                 return "";
         }
     }
-
 }
-
-<script>
-
-    function showStatusDropdown(taskId) {
-        var statusBadge = document.querySelector('div[data-taskid="' + taskId + '"]');
-        var statusSelect = statusBadge.querySelector('.status-select');
-
-        if (statusSelect.style.display === 'none') {
-            statusSelect.style.display = 'block';
-        } else {
-            statusSelect.style.display = 'none';
-        }
-    }
-
-    function updateStatus(taskId, status) {
-        var statusBadge = document.querySelector('div[data-taskid="' + taskId + '"]');
-        var statusValue = statusBadge.querySelector('.status-value');
-        var statusSelect = statusBadge.querySelector('.status-select');
-
-        statusValue.textContent = GetStatusDisplayName(status);
-        statusBadge.className = 'status-badge ' + GetStatusColor(status);
-        statusSelect.style.display = 'none';
-    }
-
-}</script>

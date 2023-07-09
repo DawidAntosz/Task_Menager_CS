@@ -478,3 +478,4 @@ C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\
 C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp\obj\Debug\net6.0\TaskMenagerApp.pdb
 C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp\obj\Debug\net6.0\TaskMenagerApp.genruntimeconfig.cache
 C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp\obj\Debug\net6.0\ref\TaskMenagerApp.dll
+C:\Users\Dawid\Desktop\CS_project\GITHUB_Project\Task_Menager_CS\TaskMenagerApp\TaskMenagerApp\bin\Debug\net6.0\Dapper.dll
