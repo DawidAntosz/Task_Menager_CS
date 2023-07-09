@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using TaskMenagerApp.Models;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Data.Common;
-using System.Data;
 using Dapper;
 
 /*
