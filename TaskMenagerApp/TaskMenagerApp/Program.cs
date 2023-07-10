@@ -1,7 +1,18 @@
+using TaskMenagerApp.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//=======================================DataBase==================================
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
+builder.Services.AddSingleton<TaskMenagerContext>(new TaskMenagerContext(connectionString));
+//=================================================================================
+
 
 var app = builder.Build();
 

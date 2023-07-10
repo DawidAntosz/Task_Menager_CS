@@ -1,31 +1,41 @@
-﻿using TaskMenagerApp.Models;
+﻿using System.Threading.Tasks;
+using TaskMenagerApp.Models;
 
 namespace TaskMenagerApp.Repositories
 {
     public class TaskRepository : ITaskRepository
     {
-        public MyTask Get(int taskID)
+
+        private readonly TaskMenagerContext _context;
+
+        public TaskRepository(TaskMenagerContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public IQueryable<MyTask> GetAllActive()
+        public MyTask Get(int taskId)
         {
-            throw new NotImplementedException();
+            return _context.Get_Task(taskId);
+        }
+
+        public IQueryable<MyTask> Get_TaskList()
+        {
+            return _context.Get_AllTask();
         }
 
         public void Added(MyTask task)
         {
-            throw new NotImplementedException();
+            _context.AddTask(task);
         }
-        public void Update(int taskID, MyTask task)
+        public void Update(int taskId, MyTask task)
         {
-            throw new NotImplementedException();
+            _context.UpdateTask(taskId, task);
         }
 
         public void Delete(int taskID)
         {
-            throw new NotImplementedException();
+            _context.DeleteTask(taskID);
         }
+
     }
 }
