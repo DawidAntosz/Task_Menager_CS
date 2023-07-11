@@ -4,10 +4,10 @@ namespace TaskMenagerApp.Repositories
 {
     public interface ITaskRepository
     {
-        MyTask Get(int taskID);
-        IQueryable<MyTask> Get_TaskList();
-        void Added(MyTask task);
-        void Update(int taskID, MyTask task);
-        void Delete(int taskID);
+        MyTask Get(Guid TaskId);
+        IQueryable<MyTask> Get_TaskList(Guid UserId);
+        void Added(MyTask task, Guid UserId);
+        void Update(Guid TaskId, MyTask task);
+        void Delete(Guid TaskId);
     }
 }

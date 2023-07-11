@@ -13,28 +13,28 @@ namespace TaskMenagerApp.Repositories
             _context = context;
         }
 
-        public MyTask Get(int taskId)
+        public MyTask Get(Guid TaskId)
         {
-            return _context.Get_Task(taskId);
+            return _context.Get_Task(TaskId);
         }
 
-        public IQueryable<MyTask> Get_TaskList()
+        public IQueryable<MyTask> Get_TaskList(Guid UserId)
         {
-            return _context.Get_AllTask();
+            return _context.Get_AllTask(UserId);
         }
 
-        public void Added(MyTask task)
+        public void Added(MyTask task, Guid UserId)
         {
-            _context.AddTask(task);
+            _context.AddTask(task, UserId);
         }
-        public void Update(int taskId, MyTask task)
+        public void Update(Guid TaskId, MyTask task)
         {
-            _context.UpdateTask(taskId, task);
+            _context.UpdateTask(TaskId, task);
         }
 
-        public void Delete(int taskID)
+        public void Delete(Guid TaskId)
         {
-            _context.DeleteTask(taskID);
+            _context.DeleteTask(TaskId);
         }
 
     }

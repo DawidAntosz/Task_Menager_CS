@@ -1,53 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 using TaskMenagerApp.Models;
-using Dapper;
 using TaskMenagerApp.Repositories;
 
-/*
- * 
- * 
-laczenie kontrolerow// relacyjne bazy danych  - 3 typy relacji 
-uml entity erd
-dwa klucze glowne w relacyjnych bazach - laczenia sie na tej podstawie robi 1* na query polaczyc dwie tablee - uzytkownik - zadania
-
-*
-*/
 
 namespace TaskMenagerApp.Controllers
 {
     public class TaskController : Controller
     {
         private readonly ITaskRepository _taskRepository;
+        public MyUser CurrentUserr = new MyUser();
 
         public TaskController(ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository;
         }
 
+
         // GET: TaskController
         [HttpGet]
         public IActionResult Index()
         {
-            var tasks = _taskRepository.Get_TaskList().ToList();
+            CurrentUserr.UserId = Guid.NewGuid();
+            var tasks = _taskRepository.Get_TaskList(CurrentUserr.UserId).ToList();
             return View(tasks);
         }
 
 
 
         // GET: Task/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid TaskId)
         {
-            var task = _taskRepository.Get(id);
+            var task = _taskRepository.Get(TaskId);
             if (task != null)
             {
                 return View(task);
             }
             return RedirectToAction(nameof(Index));
         }
-
-
-
 
         // GET: Task/Create
         public IActionResult Create()
@@ -62,19 +51,16 @@ namespace TaskMenagerApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _taskRepository.Added(task);
+                _taskRepository.Added(task, CurrentUserr.UserId);
                 return RedirectToAction(nameof(Index));
             }
             return View(task);
         }
 
-
-
-
         // GET: Task/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid TaskId)
         {
-            var task = _taskRepository.Get(id);
+            var task = _taskRepository.Get(TaskId);
             if (task != null)
             {
                 return View(task);
@@ -85,25 +71,20 @@ namespace TaskMenagerApp.Controllers
         // POST: Task/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, MyTask editTask)
+        public IActionResult Edit(Guid TaskId, MyTask editTask)
         {
             if (ModelState.IsValid)
             {
-                _taskRepository.Update(id, editTask);
+                _taskRepository.Update(TaskId, editTask);
                 return RedirectToAction(nameof(Index));
             }
             return View(editTask);
         }
 
-
-
-
-
-
         // GET: Task/Delete/5
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid TaskId)
         {
-            var Delatetask = _taskRepository.Get(id);
+            var Delatetask = _taskRepository.Get(TaskId);
             if (Delatetask != null)
             {
                 return View(Delatetask);
@@ -114,13 +95,11 @@ namespace TaskMenagerApp.Controllers
         // POST: Task/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, MyTask DelTask)
+        public IActionResult Delete(MyTask DelTask)
         {
-            _taskRepository.Delete(id);
+            _taskRepository.Delete(DelTask.TaskId);
             return RedirectToAction(nameof(Index));
         }
-
-
 
     }
 }
