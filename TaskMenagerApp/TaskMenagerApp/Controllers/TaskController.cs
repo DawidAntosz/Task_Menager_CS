@@ -10,7 +10,6 @@ namespace TaskMenagerApp.Controllers
         private readonly ITaskRepository _taskRepository;
         private readonly IUserRepository _userRepository;
         public MyUser CurrentUserr = new MyUser();
-
         public TaskController(ITaskRepository taskRepository, IUserRepository userRepository)
         {
             _taskRepository = taskRepository;
@@ -21,16 +20,11 @@ namespace TaskMenagerApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var user = _userRepository.Login("admin", "admin");
-            if (user != null)
-            {
-                return View(user);
-            }
+            CurrentUserr = _userRepository.Login("admin", "admin");
 
             var tasks = _taskRepository.Get_TaskList(CurrentUserr.UserId).ToList();
             return View(tasks);
         }
-
 
 
         // GET: Task/Details/5

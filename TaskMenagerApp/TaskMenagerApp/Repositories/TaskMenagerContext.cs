@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Npgsql;
+using System.Threading.Tasks;
 using TaskMenagerApp.Models;
 
 
@@ -17,7 +18,7 @@ namespace TaskMenagerApp.Repositories
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                var sql = "SELECT * FROM mytask WHERE task_id = @TaskId ";
+                var sql = "SELECT * FROM tasks WHERE task_id = @TaskId ";
                 return connection.QueryFirstOrDefault<MyTask>(sql, new { TaskId });
             }
         }
@@ -26,8 +27,8 @@ namespace TaskMenagerApp.Repositories
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                var sql = @"SELECT * FROM mytask WHERE fk_user = @UserId ORDER BY task_number";
-                return connection.Query<MyTask>(sql).AsQueryable();
+                var sql = @"SELECT * FROM tasks WHERE fk_user = @UserId ORDER BY task_number";
+                return connection.Query<MyTask>(sql, new { UserId }).AsQueryable();
             }
         }
 
@@ -35,15 +36,16 @@ namespace TaskMenagerApp.Repositories
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                var sqlCount = @"SELECT COUNT(*) FROM mytask WHERE fk_user = @UserId""";
+                var sqlCount = @"SELECT COUNT(*) FROM tasks WHERE fk_user = @UserId";
                 int count = connection.ExecuteScalar<int>(sqlCount, new { UserId });
 
                 task.task_Number = count + 1;
                 task.Topic ??= string.Empty;
                 task.Description ??= string.Empty;
+                task.FkUser = UserId;
 
-                var sql = @"INSERT INTO mytask (task_id, task_Number, topic, description, start_time, work_time, status, fk_user) 
-                            VALUES (@TaskId, @task_Number, @Topic, @Description, @Data, @WorkTime, @Status, @FkUser)";
+                var sql = @"INSERT INTO tasks ( task_Number, topic, description, start_time, work_time, status, fk_user ) 
+                                    VALUES ( @task_Number, @Topic, @Description, @Data, @WorkTime, @Status, @FkUser )";
                 connection.Execute(sql, task);
             }
         }
@@ -52,7 +54,7 @@ namespace TaskMenagerApp.Repositories
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                var sql = @"UPDATE mytask 
+                var sql = @"UPDATE tasks 
                             SET topic = @Topic, description = @Description, data = @Data, status = @Status 
                             WHERE task_id = @TaskId";
                 connection.Execute(sql, task);
@@ -63,10 +65,10 @@ namespace TaskMenagerApp.Repositories
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                var sql = "DELETE FROM mytask WHERE task_id = @TaskId";
+                var sql = "DELETE FROM tasks WHERE task_id = @TaskId";
                 connection.Execute(sql, new { TaskId });
 
-                var updateSql = "UPDATE mytask SET task_Number = task_Number - 1 WHERE task_id > @TaskId";
+                var updateSql = "UPDATE tasks SET task_Number = task_Number - 1 WHERE task_id > @TaskId";
                 connection.Execute(updateSql, new { TaskId });
             }
         }

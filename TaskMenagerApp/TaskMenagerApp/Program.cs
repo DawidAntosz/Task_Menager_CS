@@ -11,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<TaskMenagerContext>(new TaskMenagerContext(connectionString));
+
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<UserMenagerContext>(new UserMenagerContext(connectionString));
 //=================================================================================
 
 
