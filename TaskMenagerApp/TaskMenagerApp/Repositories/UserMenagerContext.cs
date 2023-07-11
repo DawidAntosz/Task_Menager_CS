@@ -14,6 +14,15 @@ namespace TaskMenagerApp.Repositories
             _connectionString = connectionString;
         }
 
+        public MyUser Login_user(string username, string password)
+        {
+            using (var connection = new NpgsqlConnection(_connectionString))
+            {
+                var sql = "SELECT * FROM myusers WHERE user_name = @username AND user_password = @password";
+                return connection.QueryFirstOrDefault<MyUser>(sql, new { username, password });
+            }
+        }
+
         public MyUser Get_User(Guid UserId)
         {
             using (var connection = new NpgsqlConnection(_connectionString))

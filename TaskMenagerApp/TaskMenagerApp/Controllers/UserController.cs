@@ -17,9 +17,15 @@ namespace TaskMenagerApp.Controllers
         //======================================= TODO:
 
         // GET: UserController
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login(string username, string password)
         {
-            return View();
+            var user = _userRepository.Login(username, password);
+            if (user != null)
+            {
+                return View(user);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         //=======================================

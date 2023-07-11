@@ -11,6 +11,11 @@ namespace TaskMenagerApp.Repositories
             _context = context;
         }
 
+        public MyUser Login(string username, string password)
+        {
+            return _context.Login_user(username, password);
+        }
+
         public MyUser Get(Guid UserId)
         {
             return _context.Get_User(UserId);

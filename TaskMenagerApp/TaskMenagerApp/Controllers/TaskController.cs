@@ -8,19 +8,25 @@ namespace TaskMenagerApp.Controllers
     public class TaskController : Controller
     {
         private readonly ITaskRepository _taskRepository;
+        private readonly IUserRepository _userRepository;
         public MyUser CurrentUserr = new MyUser();
 
-        public TaskController(ITaskRepository taskRepository)
+        public TaskController(ITaskRepository taskRepository, IUserRepository userRepository)
         {
             _taskRepository = taskRepository;
+            _userRepository = userRepository;
         }
-
 
         // GET: TaskController
         [HttpGet]
         public IActionResult Index()
         {
-            CurrentUserr.UserId = Guid.NewGuid();
+            var user = _userRepository.Login("admin", "admin");
+            if (user != null)
+            {
+                return View(user);
+            }
+
             var tasks = _taskRepository.Get_TaskList(CurrentUserr.UserId).ToList();
             return View(tasks);
         }
@@ -75,7 +81,7 @@ namespace TaskMenagerApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _taskRepository.Update(TaskId, editTask);
+                _taskRepository.Update(editTask, TaskId);
                 return RedirectToAction(nameof(Index));
             }
             return View(editTask);

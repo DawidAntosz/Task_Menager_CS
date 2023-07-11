@@ -7,7 +7,7 @@ namespace TaskMenagerApp.Repositories
         MyTask Get(Guid TaskId);
         IQueryable<MyTask> Get_TaskList(Guid UserId);
         void Added(MyTask task, Guid UserId);
-        void Update(Guid TaskId, MyTask task);
+        void Update(MyTask task, Guid TaskId);
         void Delete(Guid TaskId);
     }
 }

@@ -22,14 +22,13 @@ namespace TaskMenagerApp.Repositories
         {
             return _context.Get_AllTask(UserId);
         }
-
         public void Added(MyTask task, Guid UserId)
         {
             _context.AddTask(task, UserId);
         }
-        public void Update(Guid TaskId, MyTask task)
+        public void Update(MyTask task, Guid TaskId)
         {
-            _context.UpdateTask(TaskId, task);
+            _context.UpdateTask(task, TaskId);
         }
 
         public void Delete(Guid TaskId)

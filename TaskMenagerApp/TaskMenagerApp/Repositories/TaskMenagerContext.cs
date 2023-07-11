@@ -48,7 +48,7 @@ namespace TaskMenagerApp.Repositories
             }
         }
 
-        public void UpdateTask(Guid TaskId, MyTask task) 
+        public void UpdateTask(MyTask task, Guid TaskId) 
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
