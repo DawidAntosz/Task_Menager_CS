@@ -1,4 +1,7 @@
 using TaskMenagerApp.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TaskMenagerApp.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,12 @@ builder.Services.AddControllersWithViews();
 
 //=======================================DataBase==================================
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<DBContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DBContext>();
 
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<TaskMenagerContext>(new TaskMenagerContext(connectionString));
@@ -31,11 +40,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Task}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
